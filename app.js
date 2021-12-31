@@ -4,19 +4,24 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { isAuthenticatedMiddleware, jwtAuthenticationMiddleware, jwtLogin } = require('./auth/jwt-auth');
+const cors = require('cors');
+const { routes } = require('./constants/routes');
 
 const aboutRouter = require('./routes/about');
 
 const app = express();
-app.use(jwtAuthenticationMiddleware);
+//app.use(jwtAuthenticationMiddleware);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+
 app.post('/jwt-login', jwtLogin);
 
-app.use('/about', isAuthenticatedMiddleware, aboutRouter);
+//app.use(routes.ABOUT_ROUTE, isAuthenticatedMiddleware, aboutRouter);
+app.use(routes.ABOUT_ROUTE, aboutRouter);
 
 module.exports = app;

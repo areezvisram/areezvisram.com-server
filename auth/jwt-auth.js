@@ -45,10 +45,11 @@ const isAuthenticatedMiddleware = async (req, res, next) => {
     res.json({ error: 'Client not authenticated' });
 }
 
-const jwtLogin = async(req, res) => {    
-    console.log(clients.at(0).client_secret);
-    console.log(clients.at(0).client_id);
+const jwtLogin = async(req, res) => {  
+    console.log(req.body);
     const { clientId, clientSecret } = req.body;    
+    console.log(clientId);
+    console.log(clientSecret);
     const client = clients.find((client) => client.client_secret === clientSecret && client.client_id === clientId);
 
     if(!client) {

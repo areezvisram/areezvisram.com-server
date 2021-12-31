@@ -1,5 +1,5 @@
 const { aboutDatabase, language, skill } = require("../constants/about");
-const { queryAllDocs } = require("../helpers/cloudant");
+const { queryAllDocs, postDocument } = require("../helpers/cloudant");
 const { mapAboutData } = require("../mappers/about");
 const { initializeCloudant } = require("../services/cloudant");
 
@@ -11,7 +11,7 @@ const getLanguages = async () => {
         rows = res.result.rows;
     });
     
-    const mappedData = mapAboutData(rows);
+    const mappedData = mapAboutData(rows, language);
 
     return mappedData;
 }
@@ -22,12 +22,22 @@ const getSkills = async () => {
         rows = res.result.rows;
     });
 
-    const mappedData = mapAboutData(rows);
+    const mappedData = mapAboutData(rows, skill);
 
     return mappedData;
 }
 
+const postAbout = async(document) => {
+    let response;
+    await postDocument(service, document, aboutDatabase).then((res) => {
+        response = res.result;
+    });
+
+    return response;
+}
+
 module.exports = {
     getLanguages,
-    getSkills
+    getSkills,
+    postAbout
 }
