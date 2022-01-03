@@ -35,7 +35,7 @@ router.get(routes.ABOUT_GET_SKILLS, (async (req, res, next) => {
     }
 }));
 
-router.post(routes.ABOUT_POST, validateRequestBodyMiddleware(aboutSchema), (req, res, next) => {            
+router.post(routes.ABOUT_POST, validateRequestBodyMiddleware(aboutSchema), async (req, res, next) => {            
     await postAbout(req.body).then((response) => {
         res.send(response);
     })        

@@ -1,32 +1,57 @@
 const { CloudantV1 } = require('@ibm-cloud/cloudant');
 const { v4: uuid } = require('uuid');
-const { cache } = require('./cache');
-const { routes } = require('../constants/routes');
 
-const queryAllDocs = (service, dbName, partitionName) => {
+const queryAllDocsPartitioned = (service, dbName, partitionName) => {
     return service.postPartitionAllDocs({
         db: dbName,
         partitionKey: partitionName,
         includeDocs: true
-    })
-}
+    });
+};
+
+const queryAllDocs = (service, dbName) => {
+    return service.postAllDocs({
+        db: dbName,        
+        includeDocs: true
+    });
+};
 
 const postDocument = (service, document, dbName) => {
-    const type = document.partition;
-    const aboutDoc = CloudantV1.Document = {
-        '_id': `${type}:${uuid()}`,
+    const doc = CloudantV1.Document = {
+        '_id': `${uuid()}`,
         ...document
-    };        
+    };
 
-    type === "language" ? cache.del(`__express__${routes.ABOUT_ROUTE}${routes.ABOUT_GET_LANGUAGES}`) : cache.del(`__express__${routes.ABOUT_ROUTE}${routes.ABOUT_GET_SKILLS}`);    
+    return service.postDocument({
+        db: dbName,
+        document: doc
+    });
+};
+
+const postDocumentPartitioned = (service, document, dbName) => {    
+    const doc = CloudantV1.Document = {
+        '_id': `${document.partition}:${uuid()}`,
+        ...document
+    };
     
     return service.postDocument({
         db: dbName,
-        document: aboutDoc
-    })
+        document: doc
+    });
+};
+
+const deleteDocument = (service, docId, rev, dbName) => {
+    return service.deleteDocument({
+        db: dbName,
+        docId: docId,
+        rev: rev
+    });
 }
 
 module.exports = {
+    queryAllDocsPartitioned,
     queryAllDocs,
-    postDocument
-}
+    postDocumentPartitioned,
+    postDocument,
+    deleteDocument
+};

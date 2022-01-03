@@ -8,6 +8,7 @@ const cors = require('cors');
 const { routes } = require('./constants/routes');
 
 const aboutRouter = require('./routes/about');
+const experienceRouter = require('./routes/experience');
 
 const app = express();
 //app.use(jwtAuthenticationMiddleware);
@@ -23,5 +24,6 @@ app.post('/jwt-login', jwtLogin);
 
 //app.use(routes.ABOUT_ROUTE, isAuthenticatedMiddleware, aboutRouter);
 app.use(routes.ABOUT_ROUTE, aboutRouter);
+app.use(routes.EXPERIENCE_ROUTE, experienceRouter);
 
 module.exports = app;

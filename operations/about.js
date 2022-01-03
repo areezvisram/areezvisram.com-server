@@ -1,13 +1,15 @@
 const { aboutDatabase, language, skill } = require("../constants/about");
-const { queryAllDocs, postDocument } = require("../helpers/cloudant");
+const { queryAllDocsPartitioned, postDocumentPartitioned } = require("../helpers/cloudant");
 const { mapAboutData } = require("../mappers/about");
 const { initializeCloudant } = require("../services/cloudant");
+const { cache } = require('../helpers/cache');
+const { routes } = require('../constants/routes');
 
 const service = initializeCloudant();
 
 const getLanguages = async () => {    
     let rows;
-    await queryAllDocs(service, aboutDatabase, language).then((res) => {
+    await queryAllDocsPartitioned(service, aboutDatabase, language).then((res) => {
         rows = res.result.rows;
     });
     
@@ -18,7 +20,7 @@ const getLanguages = async () => {
 
 const getSkills = async () => {
     let rows;
-    await queryAllDocs(service, aboutDatabase, skill).then((res) => {
+    await queryAllDocsPartitioned(service, aboutDatabase, skill).then((res) => {
         rows = res.result.rows;
     });
 
@@ -28,8 +30,11 @@ const getSkills = async () => {
 }
 
 const postAbout = async(document) => {
+    const type = document.partition;
+    type === "language" ? cache.del(`__express__${routes.ABOUT_ROUTE}${routes.ABOUT_GET_LANGUAGES}`) : cache.del(`__express__${routes.ABOUT_ROUTE}${routes.ABOUT_GET_SKILLS}`);    
+    
     let response;
-    await postDocument(service, document, aboutDatabase).then((res) => {
+    await postDocumentPartitioned(service, document, aboutDatabase).then((res) => {
         response = res.result;
     });
 
