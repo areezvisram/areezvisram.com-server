@@ -6,6 +6,7 @@ const experienceSchema = joi.object({
     endDate: joi.string().required(),
     position: joi.string().required(),
     description: joi.array().items(joi.string()).required(),
+    technical_environment: joi.array().items(joi.string()).required(),
     index: joi.number().integer().required().strict(),
 });
 

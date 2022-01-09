@@ -1,12 +1,13 @@
 const mapExperienceData = (experienceObjects) => {    
     const unOrderedList = experienceObjects.map((experienceObject) =>  {
-        const { company, position, startDate, endDate, description } = experienceObject.doc;
+        const { company, position, startDate, endDate, description, technical_environment } = experienceObject.doc;
         return {
             company,
             position,
             startDate,
             endDate,
-            description
+            description,
+            technical_environment
         }
     });        
     const indices = experienceObjects.map((experienceObject) => experienceObject.doc.index);

@@ -11,7 +11,7 @@ const aboutRouter = require('./routes/about');
 const experienceRouter = require('./routes/experience');
 
 const app = express();
-//app.use(jwtAuthenticationMiddleware);
+app.use(jwtAuthenticationMiddleware);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,8 +22,9 @@ app.use(cors());
 
 app.post('/jwt-login', jwtLogin);
 
-//app.use(routes.ABOUT_ROUTE, isAuthenticatedMiddleware, aboutRouter);
-app.use(routes.ABOUT_ROUTE, aboutRouter);
-app.use(routes.EXPERIENCE_ROUTE, experienceRouter);
+app.use(routes.ABOUT_ROUTE, isAuthenticatedMiddleware, aboutRouter);
+// app.use(routes.ABOUT_ROUTE, aboutRouter);
+app.use(routes.EXPERIENCE_ROUTE, isAuthenticatedMiddleware, experienceRouter);
+// app.use(routes.EXPERIENCE_ROUTE, experienceRouter);
 
 module.exports = app;
