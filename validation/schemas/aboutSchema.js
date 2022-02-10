@@ -1,3 +1,4 @@
+// About request body schema
 const joi = require('joi');
 
 const aboutSchema = joi.object({

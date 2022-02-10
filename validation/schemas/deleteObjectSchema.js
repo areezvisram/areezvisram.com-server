@@ -1,3 +1,4 @@
+// Delete object request body schema
 const joi = require('joi');
 
 const deleteObjectSchema = joi.object({

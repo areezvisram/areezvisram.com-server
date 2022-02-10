@@ -5,20 +5,23 @@ const { initializeCloudant } = require("../services/cloudant");
 const { cache } = require('../helpers/cache');
 const { routes } = require('../constants/routes');
 
+// Initialize Cloudant service
 const service = initializeCloudant();
 
-const getProjects = async (partition) => {    
+// Get projects from database
+const getProjects = async (partition) => {
     let rows;
     await queryAllDocsPartitioned(service, projectsDatabase, partition).then((res) => {
         rows = res.result.rows;
     });
-    
+
     const mappedData = mapProjects(rows);
 
     return mappedData;
 }
 
-const postProject = async(document) => {
+// Post projects to database
+const postProject = async (document) => {
 
     const partition = document.partition;
 
@@ -32,7 +35,8 @@ const postProject = async(document) => {
     return response;
 };
 
-const deleteProject = async(docId, rev) => {
+// Delete project from database
+const deleteProject = async (docId, rev) => {
     cache.del(`__express__${routes.PROJECTS_ROUTE}${routes.PROJECTS_GET}`);
 
     let response;

@@ -1,5 +1,6 @@
-const mapExperienceData = (experienceObjects) => {    
-    const unOrderedList = experienceObjects.map((experienceObject) =>  {
+// Map experience data from database into user-friendly format and in correct order
+const mapExperienceData = (experienceObjects) => {
+    const unOrderedList = experienceObjects.map((experienceObject) => {
         const { company, position, startDate, endDate, description, technical_environment } = experienceObject.doc;
         return {
             company,
@@ -9,16 +10,16 @@ const mapExperienceData = (experienceObjects) => {
             description,
             technical_environment
         }
-    });        
+    });
     const indices = experienceObjects.map((experienceObject) => experienceObject.doc.index);
-    
+
     var list = [];
-    for(var i = 0; i < indices.length; i++) {
+    for (var i = 0; i < indices.length; i++) {
         const index = indices[i];
         list[index] = unOrderedList[i];
     };
 
-    return list;    
+    return list;
 }
 
 module.exports = {

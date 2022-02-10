@@ -1,8 +1,10 @@
+// Routes used across the application
 const routes = {
     ABOUT_ROUTE: '/about',
     ABOUT_GET_LANGUAGES: '/getLanguages',
     ABOUT_GET_SKILLS: '/getSkills',
     ABOUT_POST: '/',
+    ABOUT_DELETE: '/',
 
     EXPERIENCE_ROUTE: '/experience',
     EXPERIENCE_GET: '/getExperience',

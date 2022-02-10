@@ -1,3 +1,4 @@
+// Project request body schema
 const joi = require('joi');
 
 const projectSchema = joi.object({
@@ -6,7 +7,7 @@ const projectSchema = joi.object({
     languages: joi.array().items(joi.string()).required(),
     github: joi.string().required(),
     external: joi.string().required(),
-    external: joi.string().required().valid('non-featured', 'featured'),
+    partition: joi.string().required().valid('non-featured', 'featured'),
     index: joi.number().integer().required().strict(),
 });
 

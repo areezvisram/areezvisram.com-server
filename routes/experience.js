@@ -7,28 +7,32 @@ const { validateRequestBodyMiddleware } = require('../validation/validateRequest
 const { experienceSchema } = require('../validation/schemas/experienceSchema');
 const { deleteObjectSchema } = require('../validation/schemas/deleteObjectSchema');
 
+// Get experience route
+// First check cache, if empty, get from database, if not, return from cache
 router.get(routes.EXPERIENCE_GET, (async (req, res, next) => {
-    const key = '__express__' + req.originalUrl || req.url;    
+    const key = '__express__' + req.originalUrl || req.url;
     const cachedData = cache.get(key);
-    if(cachedData) {
+    if (cachedData) {
         console.log('calling experience from cache');
         res.send({ experience: cachedData });
     } else {
         console.log('calling experience from db');
-        await getExperience().then((response) => {        
+        await getExperience().then((response) => {
             cache.set(key, response, 0);
             res.send({ experience: response });
         });
-    }    
+    }
 }));
 
-router.post(routes.EXPERIENCE_POST, validateRequestBodyMiddleware(experienceSchema), async (req, res, next) => {                
+// Post experience data route with request body validation
+router.post(routes.EXPERIENCE_POST, validateRequestBodyMiddleware(experienceSchema), async (req, res, next) => {
     await postExperience(req.body).then((response) => {
         res.send(response);
-    })        
+    })
 });
 
-router.delete(routes.EXPERIENCE_DELETE, validateRequestBodyMiddleware(deleteObjectSchema), async(req, res, next) => {
+// Delete experience data route with request body validation
+router.delete(routes.EXPERIENCE_DELETE, validateRequestBodyMiddleware(deleteObjectSchema), async (req, res, next) => {
     const { docId, rev } = req.body;
     await deleteExperience(docId, rev).then((response) => {
         res.send(response);

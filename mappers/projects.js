@@ -1,5 +1,6 @@
-const mapProjects = (projects) => {    
-    const unOrderedList = projects.map((project) =>  {
+// Map project data from database into user-friendly format and in correct order
+const mapProjects = (projects) => {
+    const unOrderedList = projects.map((project) => {
         const { name, description, languages, github, external } = project.doc;
         return {
             name,
@@ -8,16 +9,16 @@ const mapProjects = (projects) => {
             github,
             external
         }
-    });        
+    });
     const indices = projects.map((project) => project.doc.index);
-    
+
     var list = [];
-    for(var i = 0; i < indices.length; i++) {
+    for (var i = 0; i < indices.length; i++) {
         const index = indices[i];
         list[index] = unOrderedList[i];
     };
 
-    return list;    
+    return list;
 }
 
 module.exports = {
