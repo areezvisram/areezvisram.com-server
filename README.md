@@ -4,7 +4,7 @@
 This project is the backend application for my personal website, built with NodeJS + Express. The database is an IBM Cloudant database.
 
 ### Architecture
-![architecture](Architecture Diagrams/Architecture Image.jpeg)
+![architecture](https://github.com/areezvisram/areezvisram.com-server/tree/master/Architecture%20Diagrams)
 
 ### Documentation
 The SwaggerHub OpenAPI documentation can be found at: [areezvisram-backend Swagger Docs](https://app.swaggerhub.com/apis/areezvisram/areezvisram-backend/1.0.0#/)
