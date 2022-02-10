@@ -5,7 +5,7 @@ const { cache } = require('../helpers/cache');
 const { routes } = require('../constants/routes');
 const { validateRequestBodyMiddleware } = require('../validation/validateRequestBodyMiddleware');
 const { experienceSchema } = require('../validation/schemas/experienceSchema');
-const { deleteExperienceSchema } = require('../validation/schemas/deleteExperienceSchema');
+const { deleteObjectSchema } = require('../validation/schemas/deleteObjectSchema');
 
 router.get(routes.EXPERIENCE_GET, (async (req, res, next) => {
     const key = '__express__' + req.originalUrl || req.url;    
@@ -28,9 +28,8 @@ router.post(routes.EXPERIENCE_POST, validateRequestBodyMiddleware(experienceSche
     })        
 });
 
-router.delete(routes.EXPERIENCE_DELETE, validateRequestBodyMiddleware(deleteExperienceSchema), async(req, res, next) => {
+router.delete(routes.EXPERIENCE_DELETE, validateRequestBodyMiddleware(deleteObjectSchema), async(req, res, next) => {
     const { docId, rev } = req.body;
-    console.log(docId, rev);
     await deleteExperience(docId, rev).then((response) => {
         res.send(response);
     })

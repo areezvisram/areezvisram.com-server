@@ -1,10 +1,10 @@
 const joi = require('joi');
 
-const deleteExperienceSchema = joi.object({
+const deleteObjectSchema = joi.object({
     docId: joi.string().required(),    
     rev: joi.string().required(),
 });
 
 module.exports = {
-    deleteExperienceSchema
+    deleteObjectSchema
 }

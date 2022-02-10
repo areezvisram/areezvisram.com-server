@@ -7,7 +7,12 @@ const routes = {
     EXPERIENCE_ROUTE: '/experience',
     EXPERIENCE_GET: '/getExperience',
     EXPERIENCE_POST: '/',
-    EXPERIENCE_DELETE: '/'
+    EXPERIENCE_DELETE: '/',
+
+    PROJECTS_ROUTE: '/projects',
+    PROJECTS_GET: '/getProjects',
+    PROJECTS_POST: '/',
+    PROJECTS_DELETE: '/'
 }
 
 module.exports = {
