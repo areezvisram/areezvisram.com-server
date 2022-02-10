@@ -6,7 +6,7 @@ const projectSchema = joi.object({
     languages: joi.array().items(joi.string()).required(),
     github: joi.string().required(),
     external: joi.string().required(),
-    external: joi.string().required().valid(['non-featured', 'featured']),
+    external: joi.string().required().valid('non-featured', 'featured'),
     index: joi.number().integer().required().strict(),
 });
 

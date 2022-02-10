@@ -7,7 +7,6 @@ const mapAboutData = (aboutObjects, type) => {
         const index = indices[i];
         list[index] = unOrderedList[i];
     }
-    console.log(list);
     return { [type + 's']: list }
 }
 

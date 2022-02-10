@@ -46,10 +46,7 @@ const isAuthenticatedMiddleware = async (req, res, next) => {
 }
 
 const jwtLogin = async(req, res) => {  
-    console.log(req.body);
     const { clientId, clientSecret } = req.body;    
-    console.log(clientId);
-    console.log(clientSecret);
     const client = clients.find((client) => client.client_secret === clientSecret && client.client_id === clientId);
 
     if(!client) {

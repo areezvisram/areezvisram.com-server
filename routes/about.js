@@ -29,7 +29,8 @@ router.get(routes.ABOUT_GET_SKILLS, (async (req, res, next) => {
         res.send(cachedData);
     } else {
         console.log('calling skills from db');
-        await getSkills().then((response) => {        
+        await getSkills().then((response) => {   
+            cache.set(key, response, 0);     
             res.send(response);
         })
     }
