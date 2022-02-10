@@ -3,14 +3,14 @@ const { IamAuthenticator } = require('ibm-cloud-sdk-core');
 
 const initializeCloudant = () => {
     const authenticator = new IamAuthenticator({
-        apikey: 'dA6Pth3GHaEBdm3fYe8t4IFkhmb3B94dhr-xlxsyiJRa'
+        apikey: process.env.CLOUD_API_KEY
     });
         
     const service = new CloudantV1({
         authenticator: authenticator
     });
         
-    service.setServiceUrl('https://e8e63075-c4be-42b8-8b32-566208c0c9ce-bluemix.cloudant.com');
+    service.setServiceUrl(process.env.SERVICE_URL);
 
     return service;
 }
