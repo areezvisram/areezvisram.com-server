@@ -4,6 +4,7 @@ const { mapProjects } = require("../mappers/projects");
 const { initializeCloudant } = require("../services/cloudant");
 const { cache } = require('../helpers/cache');
 const { routes } = require('../constants/routes');
+const { cloudinaryUpload } = require('../helpers/cloudinary');
 
 // Initialize Cloudant service
 const service = initializeCloudant();
@@ -27,10 +28,23 @@ const postProject = async (document) => {
 
     cache.del(`__express__${partition}${routes.PROJECTS_ROUTE}${routes.PROJECTS_GET}`);
 
-    let response;
-    await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
-        response = res.result;
-    });
+    const imagePath = document.imagePath;
+    delete document.imagePath;
+
+    let response = { "test": "test"};
+    await cloudinaryUpload(imagePath).then((res) => {
+        const image_url = res.url;
+        document = Object.assign({ "image_url": image_url }, document);        
+    }).then(async () => {
+        await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
+            response = res.result;
+        })
+    })
+
+    
+    // await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
+    //     response = res.result;
+    // });
 
     return response;
 };

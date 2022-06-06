@@ -28,6 +28,7 @@ app.use(cors());
 app.post('/jwt-login', jwtLogin);
 app.use(routes.ABOUT_ROUTE, isAuthenticatedMiddleware, aboutRouter);
 app.use(routes.EXPERIENCE_ROUTE, isAuthenticatedMiddleware, experienceRouter);
-app.use(routes.PROJECTS_ROUTE, isAuthenticatedMiddleware, projectsRouter);
+// app.use(routes.PROJECTS_ROUTE, isAuthenticatedMiddleware, projectsRouter);
+app.use(routes.PROJECTS_ROUTE, projectsRouter);
 
 module.exports = app;

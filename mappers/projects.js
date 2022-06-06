@@ -1,13 +1,14 @@
 // Map project data from database into user-friendly format and in correct order
 const mapProjects = (projects) => {
     const unOrderedList = projects.map((project) => {
-        const { name, description, languages, github, external } = project.doc;
+        const { name, description, languages, github, external , image_url } = project.doc;
         return {
             name,
             description,
             languages,
             github,
-            external
+            external,
+            image_url
         }
     });
     const indices = projects.map((project) => project.doc.index);

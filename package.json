@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@ibm-cloud/cloudant": "^0.0.23",
+    "cloudinary": "^1.30.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

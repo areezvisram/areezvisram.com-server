@@ -6,6 +6,7 @@ const { routes } = require('../constants/routes');
 const { deleteObjectSchema } = require('../validation/schemas/deleteObjectSchema');
 const { validateRequestBodyMiddleware } = require('../validation/validateRequestBodyMiddleware');
 const { projectSchema } = require('../validation/schemas/projectSchema');
+const { cloudinaryUpload } = require('../helpers/cloudinary');
 
 // Get projects route
 // First check cache, if empty, get from database, if not, return from cache
@@ -31,6 +32,13 @@ router.post(routes.PROJECTS_POST, validateRequestBodyMiddleware(projectSchema), 
         res.send(response);
     });
 });
+
+router.post('/cloudinary', async(req, res, next) => {
+    await cloudinaryUpload(req.body.imagePath).then((response) => {
+        res.send(response)
+    })
+})
+
 
 // Delete project data route with request body validation
 router.delete(routes.EXPERIENCE_DELETE, validateRequestBodyMiddleware(deleteObjectSchema), async (req, res, next) => {

@@ -9,6 +9,7 @@ const projectSchema = joi.object({
     external: joi.string().required(),
     partition: joi.string().required().valid('non-featured', 'featured'),
     index: joi.number().integer().required().strict(),
+    imagePath: joi.string().when('partition', { is: 'featured', otherwise: joi.forbidden() })
 });
 
 module.exports = {
