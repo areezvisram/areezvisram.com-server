@@ -11,6 +11,7 @@ const { routes } = require('./constants/routes');
 const aboutRouter = require('./routes/about');
 const experienceRouter = require('./routes/experience');
 const projectsRouter = require('./routes/projects');
+const contactMeRouter = require('./routes/contact-me');
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use(routes.ABOUT_ROUTE, aboutRouter);
 app.use(routes.EXPERIENCE_ROUTE, isAuthenticatedMiddleware, experienceRouter);
 // app.use(routes.PROJECTS_ROUTE, isAuthenticatedMiddleware, projectsRouter);
 app.use(routes.PROJECTS_ROUTE, projectsRouter);
+app.use(routes.CONTACT_ME_ROUTE, contactMeRouter);
 
 module.exports = app;

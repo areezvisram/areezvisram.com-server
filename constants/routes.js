@@ -15,7 +15,10 @@ const routes = {
     PROJECTS_ROUTE: '/projects',
     PROJECTS_GET: '/getProjects',
     PROJECTS_POST: '/',
-    PROJECTS_DELETE: '/'
+    PROJECTS_DELETE: '/',
+
+    CONTACT_ME_ROUTE: '/contact-me',
+    CONTACT_ME_POST_ENTRY: '/send-entry'
 }
 
 module.exports = {
