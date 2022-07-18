@@ -6,7 +6,7 @@
     "node": "18.4.0"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "@ibm-cloud/cloudant": "^0.0.23",
