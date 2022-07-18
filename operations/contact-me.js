@@ -15,10 +15,11 @@ const sendEmail = async (contactObject) => {
         from: 'areez.visram10@gmail.com',
         to: 'areez.visram10@gmail.com',
         subject: 'New Form Entry',
-        text: `Name: ${name} \n Email: ${email_address} \n Message: ${message}`
+        text: `Name: ${name} \nEmail: ${email_address} \nMessage: ${message}`
     }
 
-    return transporter.sendMail(mailOptions);
+    // return transporter.sendMail(mailOptions);
+    return { test: 'test' }
 }
 
 module.exports = {
