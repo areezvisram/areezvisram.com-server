@@ -32,7 +32,7 @@ const getSkills = async () => {
     return mappedData;
 }
 
-const getList = async() => {
+const getList = async () => {
     let rows;
     await queryAllDocs(service, aboutListDatabase).then((res) => {
         rows = res.result.rows;
@@ -56,7 +56,9 @@ const postAboutSkillLanguage = async (document) => {
     return response;
 }
 
-const postAboutList = async(document) => {
+const postAboutList = async (document) => {
+    cache.del(`__express__${routes.ABOUT_ROUTE}${routes.ABOUT_GET_LIST}`);
+
     let response;
     await postDocument(service, document, aboutListDatabase).then((res) => {
         response = res.result;

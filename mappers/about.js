@@ -12,13 +12,21 @@ const mapAboutSkillLanguageData = (aboutSkillLanguageObjects, type) => {
 }
 
 const mapAboutListData = (aboutListObjects) => {
-    const list = aboutListObjects.map((aboutListObject) => {
+    const unOrderedList = aboutListObjects.map((aboutListObject) => {
         const { icon, sentence } = aboutListObject.doc;
         return {
             icon,
             sentence
         }
     });
+
+    const indices = aboutListObjects.map((aboutObj) => aboutObj.doc.index);
+
+    var list = [];
+    for (var i = 0; i < indices.length; i++) {
+        const index = indices[i];
+        list[index] = unOrderedList[i];
+    }
 
     return { list: list };
 }

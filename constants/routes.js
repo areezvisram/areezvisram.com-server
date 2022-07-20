@@ -3,6 +3,7 @@ const routes = {
     ABOUT_ROUTE: '/about',
     ABOUT_GET_LANGUAGES: '/getLanguages',
     ABOUT_GET_SKILLS: '/getSkills',
+    ABOUT_GET_LIST: '/getList',
     ABOUT_POST_SKILL_LANGUAGE: '/skill-language',
     ABOUT_POST_LIST: '/list',
     ABOUT_DELETE: '/',

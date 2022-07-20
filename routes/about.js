@@ -43,10 +43,10 @@ router.get(routes.ABOUT_GET_SKILLS, (async (req, res, next) => {
     }
 }));
 
-router.get('/getList', (async (req, res, next) => {
+router.get(routes.ABOUT_GET_LIST, (async (req, res, next) => {
     const key = '__express__' + req.originalUrl || req.url;
     const cachedData = cache.get(key);
-    if(cachedData) {
+    if (cachedData) {
         console.log('calling about list from cache');
         res.send(cachedData);
     } else {
@@ -55,17 +55,17 @@ router.get('/getList', (async (req, res, next) => {
             cache.set(key, response, 0)
             res.send(response);
         })
-    }    
+    }
 }))
 
 // Post about data route with request body validation
 router.post(routes.ABOUT_POST_SKILL_LANGUAGE, validateRequestBodyMiddleware(aboutSkillLanguageSchema), async (req, res, next) => {
-    await postAboutSkillLanguage(req.body).then((response) => {        
+    await postAboutSkillLanguage(req.body).then((response) => {
         res.send(response);
-    })      
+    })
 })
 
-router.post(routes.ABOUT_POST_LIST, validateRequestBodyMiddleware(aboutListSchema), async(req, res, next) => {
+router.post(routes.ABOUT_POST_LIST, validateRequestBodyMiddleware(aboutListSchema), async (req, res, next) => {
     await postAboutList(req.body).then((response) => {
         res.send(response);
     })
