@@ -39,6 +39,8 @@ const postProject = async (document) => {
         await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
             response = res.result;
         })
+    }).catch((err) => {
+        console.log(err)
     })
 
 
