@@ -31,17 +31,17 @@ const postProject = async (document) => {
     const imagePath = document.imagePath;
     delete document.imagePath;
 
-    let response = { "test": "test"};
+    let response;
     await cloudinaryUpload(imagePath).then((res) => {
         const image_url = res.url;
-        document = Object.assign({ "image_url": image_url }, document);        
+        document = Object.assign({ "image_url": image_url }, document);
     }).then(async () => {
         await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
             response = res.result;
         })
     })
 
-    
+
     // await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
     //     response = res.result;
     // });
