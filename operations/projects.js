@@ -28,27 +28,10 @@ const postProject = async (document) => {
 
     cache.del(`__express__${partition}${routes.PROJECTS_ROUTE}${routes.PROJECTS_GET}`);
 
-    // const imagePath = document.imagePath;
-    // delete document.imagePath;
-
-    // let response;
-    // await cloudinaryUpload(imagePath).then((res) => {
-    //     const image_url = res.url;
-    //     document = Object.assign({ "image_url": image_url }, document);
-    // }).then(async () => {
-
-    // }).catch((err) => {
-    //     console.log(err)
-    // })
     let response;
     await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
         response = res.result;
     });
-
-
-    // await postDocumentPartitioned(service, document, projectsDatabase).then((res) => {
-    //     response = res.result;
-    // });
 
     return response;
 };
