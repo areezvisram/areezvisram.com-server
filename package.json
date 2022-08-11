@@ -25,7 +25,7 @@
     "njwt": "^1.2.0",
     "node-cache": "^5.1.2",
     "nodemailer": "^6.7.5",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.19",
     "uuid": "^8.3.2"
   }
 }
