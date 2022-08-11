@@ -7,6 +7,19 @@
 * The database is a NoSQL IBM Cloudant Database
 * The backend server is hosted on Heroku
 
+### Technologies & Libraries Used
+* NodeJS
+* Express
+* @ibm-cloud/cloudant
+* cors
+* dotenv
+* http-status-codes
+* ibm-cloud-sdk-core
+* joi
+* node-cache
+* nodemon
+* uuid
+
 ### Design
 ![architecture](/Architecture%20Diagrams/Architecture%20Image.jpeg)
 * Authentication is needed, if a valid client calls the endpoint, a JWT is generated 
@@ -21,16 +34,3 @@
 ### Documentation
 The SwaggerHub OpenAPI documentation can be found at: [areezvisram-backend Swagger Docs](https://app.swaggerhub.com/apis/areezvisram/areezvisram-backend/1.0.0#/)
 An HTML rendering of the documentation can also be found in the Documentation folder in this repository
-
-### Technologies & Libraries Used
-* NodeJS
-* Express
-* @ibm-cloud/cloudant
-* cors
-* dotenv
-* http-status-codes
-* ibm-cloud-sdk-core
-* joi
-* node-cache
-* nodemon
-* uuid
