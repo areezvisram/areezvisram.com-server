@@ -18,8 +18,7 @@ const sendEmail = async (contactObject) => {
         text: `Name: ${name} \nEmail: ${email_address} \nMessage: ${message}`
     }
 
-    // return transporter.sendMail(mailOptions);
-    return { test: 'test' }
+    return transporter.sendMail(mailOptions);
 }
 
 module.exports = {
