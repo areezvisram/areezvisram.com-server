@@ -1,14 +1,13 @@
 // Map experience data from database into user-friendly format and in correct order
 const mapExperienceData = (experienceObjects) => {
     const unOrderedList = experienceObjects.map((experienceObject) => {
-        const { company, position, startDate, endDate, description, technical_environment } = experienceObject.doc;
+        const { company, position, startDate, endDate, description } = experienceObject.doc;
         return {
             company,
             position,
             startDate,
             endDate,
             description,
-            technical_environment
         }
     });
     const indices = experienceObjects.map((experienceObject) => experienceObject.doc.index);
